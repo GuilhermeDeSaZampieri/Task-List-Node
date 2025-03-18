@@ -1,0 +1,17 @@
+{
+    "env": {
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "sourceType": "script"
+    },
+    "overrides": [
+      {
+        "files": ["**/*.js"],
+        "parserOptions": {
+          "sourceType": "commonjs"
+        }
+      }
+    ]
+  }

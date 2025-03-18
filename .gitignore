@@ -1,3 +1,4 @@
+HEAD
 # Logs
 logs
 *.log
@@ -134,3 +135,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+Backend/node_modules
+Backend/.env
+package-lock.json
+0761823 (Enviando Backend To-do List)

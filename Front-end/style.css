@@ -43,7 +43,11 @@ header h1 {
   margin-inline: auto;
   padding-inline: 1.25rem;
 }
-
+.btn-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
 .btn {
   border-radius: 0.25rem;
   background-color: var(--primary);

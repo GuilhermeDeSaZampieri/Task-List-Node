@@ -5,7 +5,7 @@ finishButtons.forEach((button) => {
 });
 
 function finishTask(event) {
-  const li = event.target.parentElement;
+  const li = event.target.parentElement.parentElement;
   li.classList.toggle("done");
 
   if (li.classList.contains("done")) {
@@ -13,6 +13,12 @@ function finishTask(event) {
   } else {
     event.target.innerText = "Finalizar";
   }
+}
+
+function removeTask(event) {
+  const li = event.target.parentElement.parentElement;
+  const ul = li.parentElement;
+  ul.removeChild(li);
 }
 
 const form = document.querySelector("form");
@@ -24,6 +30,7 @@ form.addEventListener("submit", (event) => {
   const taskText = input.value;
 
   if (taskText === "") {
+    alert("Escreva alguma coisa");
     return;
   }
 
@@ -35,15 +42,25 @@ form.addEventListener("submit", (event) => {
     }
   });
 
-  const button = document.createElement("button");
-  button.classList.add("btn");
-  button.addEventListener("click", finishTask);
-  button.innerText = "Finalizar";
+  const buttonFinish = document.createElement("button");
+  buttonFinish.classList.add("btn");
+  buttonFinish.innerText = "Finalizar";
+  buttonFinish.addEventListener("click", finishTask);
+
+  const buttonDelete = document.createElement("button");
+  buttonDelete.classList.add("btn");
+  buttonDelete.addEventListener("click", removeTask);
+  buttonDelete.innerText = "Excluir";
 
   const li = document.createElement("li");
   li.innerHTML = "<span>" + taskText + "</span>";
-  li.appendChild(button);
+
+  const buttonBox = document.createElement("div");
+  buttonBox.classList.add("btn-box");
+  buttonBox.appendChild(buttonFinish);
+  buttonBox.appendChild(buttonDelete);
+  li.appendChild(buttonBox);
 
   const ul = document.querySelector(".tasks ul");
-  ul.appendChild(li);
+  ul.prepend(li); //adiciona arquivos ao mais recente
 });

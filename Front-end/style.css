@@ -3,14 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* 
+
 :root {
   --font: "Inter", sans-serif;
   --primary: #0080ff;
   --primary-hover-color: #0069d1;
   --foreground-color: #fff;
   --border-color-black: #000000;
-} */
+}
 
 body {
   display: flex;
@@ -55,13 +55,6 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-}
-.task-group {
-  flex-direction: column;
-}
-.task-group label {
-  font-weight: bold;
-  font-size: large;
 }
 
 #task-input {

@@ -3,49 +3,54 @@
   <head>
     <meta charset="UTF-8" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Boldonse&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <!--Forma de interpretar o conjunto de caracteres da pagina-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task List</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <header class="container">
-      <h1>Lista de Tarefas</h1>
-    </header>
-
     <main class="container">
-      <section class="form">
+      <section class="todo-app">
+        <h1>To-Do App</h1>
+
         <form class="create-task-form">
-          <div class="create-task-input">
-            <label for="task">Tarefa</label>
-            <input id="task" type="text" placeholder="Ex.1 Comprar Rosquinha">
+          <div class="task-group">
+            <label for="task-input">Titulo</label>
+            <input
+              id="task-input"
+              type="text"
+              placeholder="Add a new task..."
+            />
+          </div>
+          <div class="task-group">
+            <label for="task-select">Status</label>
+            <select id="task-select">
+              <option value="pendente">pendente</option>
+              <option value="em andamento">em andamento</option>
+              <option value="concluida">concluida</option>
+            </select>
           </div>
 
-          <button class="btn">Adicionar tarefa</button>
+          <button type="submit" id="btn-add-task">
+            <i class="fa-solid fa-plus"></i>
+          </button>
         </form>
-      </section>
-      <section class="tasks">
-        <ul>
-          <!-- <li>
-            <span>Comprar pão</span>
-            <button class="btn">Finalizar</button>
-          </li>
-          <li>
-            <span>Comprar Presunto</span>
-            <button class="btn">Finalizar</button>
-          </li>
-          <li>
-            <span>Comprar queijo</span>
-            <button class="btn">Finalizar</button>
-          </li> -->
-        </ul>
+        <div class="todos-container">
+          <ul id="task-list"></ul>
+          <img class="empty-img" src="../images/empty.svg" alt="empity" />
+        </div>
       </section>
     </main>
-     
-    </div>
   </body>
   <script src="script.js"></script>
 </html>

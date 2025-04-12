@@ -1,11 +1,12 @@
 const tbody = document.querySelector("tbody");
+
 const addForm = document.querySelector(".create-task-form");
-const inputTask = document.querySelector("#ask-input");
+const inputTask = document.querySelector("#task-input");
 
 const fetchTasks = async () => {
   const res = await fetch("http://localhost:3333/tasks");
-  const tasks = await res.json();
-  return tasks;
+  const data = await res.json();
+  return data.tasks;
 };
 
 const addtask = async (event) => {
@@ -135,6 +136,7 @@ const createRow = (task) => {
 
 const loadTasks = async () => {
   const tasks = await fetchTasks();
+  console.log("Dados recebidos:", tasks); // 👈 VERIFICAR AQUI
 
   tbody.innerHTML = "";
 

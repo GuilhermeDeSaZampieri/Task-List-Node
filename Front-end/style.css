@@ -6,10 +6,10 @@
 
 :root {
   --font: "Inter", sans-serif;
-  --primary: #0080ff;
+  /* --primary: #0080ff;
   --primary-hover-color: #0069d1;
   --foreground-color: #fff;
-  --border-color-black: #000000;
+  --border-color-black: #000000; */
 }
 
 body {
@@ -31,8 +31,7 @@ body {
 }
 
 .todo-app {
-  width: 100%;
-  max-width: 36rem;
+  width: 60%;
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -103,16 +102,60 @@ body {
   background-color: #ff6f91;
 }
 
-.todos-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#task-list {
+table {
+  border-collapse: collapse;
   width: 100%;
 }
 
+td,
+th {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+td {
+  color: #f8f8ff;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+select {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: capitalize;
+  background-color: #f5f5f5;
+}
+
+select:hover {
+  background-color: #ddd;
+}
+
+.btn-action {
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-action:nth-child(1) {
+  background-color: #f4a460;
+  margin-right: 5px;
+}
+
+.btn-action:nth-child(2) {
+  background-color: #8e2ce5;
+}
 /* 
 .done span {
   text-decoration: line-through;

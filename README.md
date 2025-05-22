@@ -51,5 +51,5 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 
 ---
 
-Desenvolvido com ❤️ por [Seu Nome]
+Desenvolvido com ❤️ por Gui
 

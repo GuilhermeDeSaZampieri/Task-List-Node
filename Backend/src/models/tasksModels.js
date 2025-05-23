@@ -16,9 +16,9 @@ const CreateTask = async(task) => {
     const [createdTask] = await connection.execute(query, [title,'pendente',dateUTC]);
 
     const queryReturn = 'SELECT * FROM tasks WHERE id = ?';
-    const [result] = await connection.execute(queryReturn, [createdTask.insertId]);
-
-    return result[0];
+    const [row] = await connection.execute(queryReturn, [createdTask.insertId]);
+    
+    return row[0];
 };
 
 const deleteTask = async (id) =>{

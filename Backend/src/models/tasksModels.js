@@ -1,7 +1,6 @@
 const connection = require('../models/connection');
 
 const getAll = async () =>{
-    //
     const [tasks] = await connection.execute('SELECT * FROM tasks');
     return tasks;
 };
@@ -16,9 +15,9 @@ const CreateTask = async(task) => {
     const [createdTask] = await connection.execute(query, [title,'pendente',dateUTC]);
 
     const queryReturn = 'SELECT * FROM tasks WHERE id = ?';
-    const [row] = await connection.execute(queryReturn, [createdTask.insertId]);
+    const [result] = await connection.execute(queryReturn, [createdTask.insertId]);
     
-    return row[0];
+    return result[0];
 };
 
 const deleteTask = async (id) =>{

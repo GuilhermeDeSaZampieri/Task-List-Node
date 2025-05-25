@@ -8,48 +8,30 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Boldonse&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <!--Forma de interpretar o conjunto de caracteres da pagina-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task List</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
+
   <body>
     <main class="container">
-      <section class="todo-app">
-        <h1>To-Do App</h1>
+        <header>
+          <div class="point">
+            <div class="redPoint"></div>
+            <div class="yellowPoint"></div>
+            <div class="greenPoint"></div>
+          </div>
+          <h1>To-Do App</h1>
+          <div></div>
+        </header>
 
         <form class="create-task-form">
           <input id="task-input" type="text" placeholder="Add a new task..." />
-          <!-- <div class="task-group">
-            <label for="task-select">Status</label>
-            <select id="task-select">
-              <option value="pendente">pendente</option>
-              <option value="em andamento">em andamento</option>
-              <option value="concluida">concluida</option>
-            </select>
-          </div> -->
 
           <button type="submit" id="btn-add-task">
             <i class="fa-solid fa-plus"></i>
           </button>
         </form>
-        <table>
-          <thead>
-            <tr>
-              <th>Tarefa</th>
-              <th>Criada em</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
     </main>
     <script src="script.js"></script>
   </body>

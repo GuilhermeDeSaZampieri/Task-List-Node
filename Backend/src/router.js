@@ -17,6 +17,13 @@ router.delete(
   tasksMiddleware.validateId,
   taskController.deleteTask
 );
+
+router.get(
+  "/tasks/:id",
+  tasksMiddleware.validateId,
+  taskController.getById
+);
+
 router.put(
   "/tasks/:id",
   tasksMiddleware.validateId,

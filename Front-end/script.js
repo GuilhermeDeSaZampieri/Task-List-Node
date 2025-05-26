@@ -1,4 +1,4 @@
-const tbody = document.querySelector("tbody");
+const tbody = document.querySelector(".tasks-container");
 
 const addForm = document.querySelector(".create-task-form");
 const inputTask = document.querySelector("#task-input");
@@ -26,7 +26,7 @@ const addtask = async (event) => {
 
 const deleteTask = async (id) => {
   await fetch(`http://localhost:3333/tasks/${id}`, {
-    method: "delete", 
+    method: "delete",
   });
 
   loadTasks();
@@ -73,81 +73,105 @@ const createSelect = (value) => {
 };
 
 const createRow = (task) => {
-  const { id, title, created_at, status } = task;
+  const { id, title } = task;
 
-  const tr = createElement("tr");
-  const tdTitle = createElement("td", title);
-  const tdCreatedAt = createElement("td", created_at);
-  const tdStatus = createElement("td");
-  const tdActions = createElement("td");
-
-  const select = createSelect(status);
-
-  select.addEventListener("change", ({ target }) =>
-    updateTask({ ...task, status: target.value })
-  );
+  const div = createElement("div");
+  const tdTitle = createElement("h2", title);
+  const divActions = createElement("div");
 
   const editButton = createElement(
     "button",
     "",
-    '<span class="material-symbols-outlined">edit</span>'
+    '<span class="material-symbols-outlined"> edit </span>'
+  );
+
+  const infoButton = createElement(
+    "button",
+    "",
+    '<span class="material-symbols-outlined"> priority_high </span>'
   );
 
   const deletebutton = createElement(
     "button",
     "",
-    '<span class="material-symbols-outlined">delete</span>'
+    '<span class="material-symbols-outlined"> delete </span>'
   );
 
-  const editForm = createElement("form");
-  const editInput = createElement("input");
-
-  editInput.value = title;
-  editForm.appendChild(editInput);
-
-  editForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    updateTask({ id, title: editInput.value, status });
-  });
-
-  editButton.addEventListener("click", () => {
-    tdTitle.innerText = "";
-    tdTitle.appendChild(editForm);
-  });
-
-  editButton.classList.add("btn-action");
-  deletebutton.classList.add("btn-action");
+  div.classList.add("task");
+  divActions.classList.add("actions");
+  infoButton.classList.add("action-btn", "info-btn");
+  editButton.classList.add("action-btn", "edit-btn");
+  deletebutton.classList.add("action-btn", "delete-btn");
 
   deletebutton.addEventListener("click", () => deleteTask(id));
 
-  tdStatus.appendChild(select);
+  editButton.addEventListener("click", () => {
+    console.log("Editar task:", id);
+  });
 
-  tdActions.appendChild(editButton);
-  tdActions.appendChild(deletebutton);
+  infoButton.addEventListener('click', () => {
+    openModal(task); 
+  });
 
-  tr.appendChild(tdTitle);
-  tr.appendChild(tdCreatedAt);
-  tr.appendChild(tdStatus);
-  tr.appendChild(tdActions);
+  divActions.appendChild(infoButton);
+  divActions.appendChild(editButton);
+  divActions.appendChild(deletebutton);
+  
+  div.appendChild(tdTitle);
+  div.appendChild(divActions);
 
-  return tr;
+  console.log(id);
+  return div;
 };
 
 const loadTasks = async () => {
-  const tasks = await fetchTasks();
-  console.log("Dados recebidos:", tasks); // 👈 VERIFICAR AQUI
+ try {
+    const tasks = await fetchTasks();
+    console.log("Dados recebidos:", tasks);
 
-  tbody.innerHTML = "";
+    tbody.innerHTML = "";
 
-  tasks.forEach((task) => {
-    const tr = createRow(task);
-    tbody.appendChild(tr);
-  });
+    tasks.forEach((task) => {
+      const tr = createRow(task);
+      tbody.appendChild(tr);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar tasks:", error);
+  }
 };
 
 addForm.addEventListener("submit", addtask);
 loadTasks();
+
+//MODAL INFO;
+
+function openModal(task) {
+  document.getElementById("infoModal").style.display = "flex";
+  document.body.style.overflow = "hidden";
+
+  document.getElementById("modal-task-title").textContent = `Título: ${task.title}`;
+  document.getElementById("modal-task-status").textContent = `Status: ${task.status ?? "pendente"}`;
+  document.getElementById("modal-task-date").textContent = `Criada em: ${formatDate(task.created_at ?? new Date())}`;
+}
+
+// Função para fechar o modal
+function closeModal() {
+  document.getElementById("infoModal").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("infoModal");
+  if (event.target === modal) closeModal();
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") closeModal();
+});
+
+document.querySelector(".close").addEventListener("click", closeModal);
+
+
 
 // const finishButtons = document.querySelectorAll(".tasks ul li button");
 

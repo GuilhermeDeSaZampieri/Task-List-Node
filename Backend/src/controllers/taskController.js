@@ -1,9 +1,22 @@
 const tasksModel = require('../models/tasksModels');
 
-const getAll = async (_req, resp) => {
+const getAll = async (req, resp) => {
 
   try {
     const tasks = await tasksModel.getAll();
+
+    return resp.status(200).json({tasks});
+  } catch (error) {
+    return resp.status(500).send({ error: "Erro ao Econtrar tarefa" });
+  }
+};
+
+
+const getById = async (req, resp) => {
+  const {id} = req.params;
+
+  try {
+    const tasks = await tasksModel.getById(id);
 
     return resp.status(200).json({tasks});
   } catch (error) {
@@ -50,6 +63,7 @@ module.exports = {
     getAll,
     CreateTask,
     deleteTask,
-    updateTask
+    updateTask,
+    getById
 
 };

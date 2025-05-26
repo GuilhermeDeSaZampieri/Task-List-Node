@@ -36,25 +36,21 @@
         </button>
       </form>
 
-      <div class="task">
-        <h2>Tarefa</h2>
-        <div class="actions">
-          <button class="action-btn info-btn" title="Informações da tarefa">
-            <span class="material-symbols-outlined"> priority_high </span>
-          </button>
-          <button class="action-btn edit-btn" title="Editar tarefa">
-            <span class="material-symbols-outlined"> edit </span>
-          </button>
-          <button class="action-btn delete-btn" title="Deletar tarefa">
-            <span class="material-symbols-outlined"> delete </span>
-          </button>
-        </div>
-      </div>
-
-      <div class="task">
-        <h2>Tarefa</h2>
-      </div>
+      <!-- JS VAI FAZER -->
+      <div class="tasks-container"></div>
     </main>
+
+    <div id="infoModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Informações da Tarefa</h2>
+        <p id="modal-task-title">Título:</p>
+        <p id="modal-task-status">Status:</p>
+        <p id="modal-task-date">Data:</p>
+      </div>
+    </div>
+
+    
     <script src="script.js"></script>
   </body>
 </html>

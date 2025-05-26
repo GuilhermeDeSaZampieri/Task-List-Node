@@ -5,6 +5,11 @@ const getAll = async () =>{
     return tasks;
 };
 
+const getById = async (id) =>{
+    const [tasks] = await connection.execute('SELECT * FROM tasks WHERE id = ?', [id]);
+    return tasks;
+};
+
 const CreateTask = async(task) => {
 
     const { title } = task;
@@ -43,5 +48,6 @@ module.exports = {
     getAll,
     CreateTask,
     deleteTask,
-    updateTask
+    updateTask,
+    getById
 };

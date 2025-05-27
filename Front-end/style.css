@@ -9,6 +9,13 @@
 :root {
   --bg: rgb(34, 34, 33);
   --primarytext: #f2e8cf;
+  --bodyBg: rgba(39, 39, 34, 0.86);
+  --redPoint: #fc5f56;
+  --yePoint: #fbbc2d;
+  --grePoint: #22c841;
+  --tasks: rgba(61, 61, 53, 0.66);
+  --font:   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -16,6 +23,7 @@ body {
   justify-content: center;
   padding-top: 100px;
   color: var(--primarytext);
+  background-color: var(--bodyBg);
 }
 
 .container {
@@ -26,7 +34,6 @@ body {
   background-color: var(--bg);
   flex-direction: column;
   padding-bottom: 40px;
-
 }
 header {
   margin-top: 20px;
@@ -51,19 +58,19 @@ header {
 .redPoint {
   height: 10px;
   width: 10px;
-  background-color: #fc5f56;
+  background-color: var(--redPoint);
   border-radius: 5px;
 }
 .yellowPoint {
   height: 10px;
   width: 10px;
-  background-color: #fbbc2d;
+  background-color: var(--yePoint);
   border-radius: 5px;
 }
 .greenPoint {
   height: 10px;
   width: 10px;
-  background-color: #22c841;
+  background-color: var(--grePoint);
   border-radius: 5px;
 }
 
@@ -107,14 +114,14 @@ h1 {
 #btn-add-task:hover {
   opacity: 0.8;
   transform: scale(1.1);
+  font-size: 1.4rem;
 }
 
 #btn-add-task:active {
   opacity: 0.6;
 }
 
-.tasks-container
-{
+.tasks-container {
   margin-top: 20px;
   width: 80%;
 }
@@ -127,7 +134,7 @@ h1 {
   color: var(--primarytext);
   font-size: 1rem;
   align-items: center;
-  background: rgba(61, 61, 53, 0.66);
+  background: var(--tasks);
   border-radius: 10px;
   padding: 0.5rem;
   box-sizing: border-box;
@@ -165,12 +172,12 @@ h1 {
   transform: scale(1.1);
 }
 .info-btn:hover {
-  background-color: rgb(245, 178, 23);
+  background-color: var(--yePoint);
   transform: scale(1.1);
 }
 
 .edit-btn:hover {
-  background-color: #22c841;
+  background-color: var(--grePoint);
   transform: scale(1.1);
 }
 
@@ -178,19 +185,25 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed; 
-  z-index: 9999; 
+  position: fixed;
+  z-index: 9999;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(4px); 
-  background-color: rgba(0, 0, 0, 0.6); 
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .modal {
@@ -204,28 +217,136 @@ h1 {
 
 .modal-content {
   position: relative;
-  background-color: #1e1e1e;
+  background-color: rgb(37, 36, 36);
   padding: 30px;
   border-radius: 12px;
   width: 90%;
   max-width: 500px;
-  margin: 20px; 
+  margin: 20px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease-in-out;
 }
 
+.style-title {
+  font-size: 2rem;
+}
+
+.style-p {
+  margin: 0.75rem;
+  font-family: var(--font);
+}
+
+.form-group {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.style-label {
+  font-weight: 600;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+#taskTitleInput {
+  width: 70%;
+  height: 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  border: 1px solid var(--primarytext);
+  background-color: transparent;
+  color: var(--primarytext);
+}
+
+#selectContainer {
+  width: 70%;
+}
+select {
+  background-color: rgb(37, 36, 36);
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  color: var(--primarytext);
+  font-size: 0.75rem;
+  padding-left: 0.2rem;
+  height: 1.5rem;
+  width: 100%;
+}
+
+select:focus,
+input[type="text"]:focus {
+  border-color: #888;
+}
+
+.form-actions {
+  margin-top: 1rem;
+  margin-left: 0.3rem;
+}
+
+.updateModelButton {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: var(--yePoint);
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+.updateModelButton:hover {
+  background-color: rgb(224, 147, 31);
+  transform: scale(1.1);
+}
+
+.deleteModelButton {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color:  #d62828;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.deleteModelButton:hover {
+  background-color: rgb(255, 17, 0); 
+  transform: scale(1.05);
+}
+
+
+.cancelModelButton {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #5a5a5a;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.cancelModelButton:hover {
+  background-color: #444;
+  color: #fff;
+  transform: scale(1.05);
+}
+
 .close {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 1.5rem;
+  right: 1.5rem;
   font-size: 24px;
   cursor: pointer;
   border: none;
 }
-.close:hover{
+.close:hover {
   transform: scale(1.2);
-  color:rgb(233, 147, 112);
-
+  color: rgb(233, 147, 112);
 }
 
 @media (max-width: 600px) {
@@ -234,7 +355,6 @@ h1 {
     padding: 20px;
   }
 }
-
 
 @media screen and (max-width: 768px) {
   header {

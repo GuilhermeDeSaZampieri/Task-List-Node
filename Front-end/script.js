@@ -103,20 +103,20 @@ const createRow = (task) => {
   editButton.classList.add("action-btn", "edit-btn");
   deletebutton.classList.add("action-btn", "delete-btn");
 
-  deletebutton.addEventListener("click", () => deleteTask(id));
+  deletebutton.addEventListener("click", () => openModal(2, task));
 
   editButton.addEventListener("click", () => {
-    console.log("Editar task:", id);
+    openModal(1, task);
   });
 
-  infoButton.addEventListener('click', () => {
-    openModal(task); 
+  infoButton.addEventListener("click", () => {
+    openModal(0, task);
   });
 
   divActions.appendChild(infoButton);
   divActions.appendChild(editButton);
   divActions.appendChild(deletebutton);
-  
+
   div.appendChild(tdTitle);
   div.appendChild(divActions);
 
@@ -125,7 +125,7 @@ const createRow = (task) => {
 };
 
 const loadTasks = async () => {
- try {
+  try {
     const tasks = await fetchTasks();
     console.log("Dados recebidos:", tasks);
 
@@ -143,25 +143,80 @@ const loadTasks = async () => {
 addForm.addEventListener("submit", addtask);
 loadTasks();
 
-//MODAL INFO;
-
-function openModal(task) {
-  document.getElementById("infoModal").style.display = "flex";
-  document.body.style.overflow = "hidden";
-
-  document.getElementById("modal-task-title").textContent = `Título: ${task.title}`;
-  document.getElementById("modal-task-status").textContent = `Status: ${task.status ?? "pendente"}`;
-  document.getElementById("modal-task-date").textContent = `Criada em: ${formatDate(task.created_at ?? new Date())}`;
+function handleDelete(id) {
+  deleteTask(id);
+  closeModal();
 }
 
-// Função para fechar o modal
+function openModal(tipo, task) {
+  const modal = document.getElementById("modal");
+  const modalContent = document.getElementById("modal-content");
+
+  modalContent.innerHTML = "";
+
+  if (tipo == 0) {
+    modalContent.innerHTML = `
+      <h2 class="style-title">Informações da tarefa</h2>
+      <span class="close" onclick="closeModal()">X</span>
+      <p class="style-p">Título: ${task.title}</p>
+      <p class="style-p">Status: ${task.status}</p>
+      <p class="style-p">Data: ${formatDate(task.created_at)}</p>
+    `;
+  } else if (tipo == 1) {
+    modalContent.innerHTML = `
+      <h2 class="style-title">Editar tarefa</h2>      
+      <form id="updateTaskForm">
+        <div class="form-group">
+          <label class="style-label" for="taskTitle">Título:</label>
+          <input type="text" id="taskTitleInput" value="${task.title}" required>
+        </div>
+        <div class="form-group">
+          <label class="style-label" for="taskStatus">Status:</label>
+          <div id="selectContainer"></div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="updateModelButton">Atualizar</button>
+          <button type="button" class="cancelModelButton" onclick="closeModal()">Cancelar</button>
+        </div>
+      </form>
+    `;
+    const selectContainer = document.getElementById("selectContainer");
+    const statusSelect = createSelect(task.status);
+    statusSelect.id = "taskStatus";
+    statusSelect.setAttribute("required", "");
+    selectContainer.appendChild(statusSelect);
+
+    document
+      .getElementById("updateTaskForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        const title = document.getElementById("taskTitleInput").value;
+        const status = document.getElementById("taskStatus").value;
+        updateTask({ id: task.id, title, status });
+        closeModal();
+      });
+
+  } else if (tipo == 2) {
+    modalContent.innerHTML = `
+      <h2 class="style-title">Deletar tarefa</h2>      
+      <p class="style-p">Tem certeza que deseja deletar a tarefa "<strong>${task.title}</strong>"?</p>
+      <p class="style-p">Esta ação não pode ser desfeita.</p>
+      <div class="form-actions">
+        <button type="button"  class="deleteModelButton" cancelModelButton onclick="handleDelete(${task.id})" class="delete-btn">Deletar</button>
+        <button type="button" class="cancelModelButton" onclick="closeModal()">Cancelar</button>
+      </div>`;
+  }
+
+  modal.style.display = "flex";
+}
+
 function closeModal() {
-  document.getElementById("infoModal").style.display = "none";
+  document.getElementById("modal").style.display = "none";
   document.body.style.overflow = "auto";
 }
 
 window.addEventListener("click", function (event) {
-  const modal = document.getElementById("infoModal");
+  const modal = document.getElementById("modal");
   if (event.target === modal) closeModal();
 });
 
@@ -169,73 +224,4 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") closeModal();
 });
 
-document.querySelector(".close").addEventListener("click", closeModal);
-
-
-
-// const finishButtons = document.querySelectorAll(".tasks ul li button");
-
-// finishButtons.forEach((button) => {
-//   button.addEventListener("click", finishTask);
-// });
-
-// function finishTask(event) {
-//   const li = event.target.parentElement.parentElement;
-//   li.classList.toggle("done");
-
-//   if (li.classList.contains("done")) {
-//     event.target.innerText = "Desfazer";
-//   } else {
-//     event.target.innerText = "Finalizar";
-//   }
-// }
-
-// function removeTask(event) {
-//   const li = event.target.parentElement.parentElement;
-//   const ul = li.parentElement;
-//   ul.removeChild(li);
-// }
-
-// const form = document.querySelector("form");
-
-// form.addEventListener("submit", (event) => {
-//   event.preventDefault(); //tira o reload da pagina
-
-//   const input = document.querySelector("input");
-//   const taskText = input.value;
-
-//   if (taskText === "") {
-//     alert("Escreva alguma coisa");
-//     return;
-//   }
-
-//   const existingTasks = document.querySelectorAll(".tasks ul li span");
-//   existingTasks.forEach((span) => {
-//     if (span.innerText.toLowerCase() === taskText.toLowerCase()) {
-//       alert("Já foi informada uma atividade com esse título");
-//       taskText = "";
-//     }
-//   });
-
-//   const buttonFinish = document.createElement("button");
-//   buttonFinish.classList.add("btn");
-//   buttonFinish.innerText = "Finalizar";
-//   buttonFinish.addEventListener("click", finishTask);
-
-//   const buttonDelete = document.createElement("button");
-//   buttonDelete.classList.add("btn");
-//   buttonDelete.addEventListener("click", removeTask);
-//   buttonDelete.innerText = "Excluir";
-
-//   const li = document.createElement("li");
-//   li.innerHTML = "<span>" + taskText + "</span>";
-
-//   const buttonBox = document.createElement("div");
-//   buttonBox.classList.add("btn-box");
-//   buttonBox.appendChild(buttonFinish);
-//   buttonBox.appendChild(buttonDelete);
-//   li.appendChild(buttonBox);
-
-//   const ul = document.querySelector(".tasks ul");
-//   ul.prepend(li); //adiciona arquivos ao mais recente
-// });
+document.querySelector("close").addEventListener("click", closeModal);

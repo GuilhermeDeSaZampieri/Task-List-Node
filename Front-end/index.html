@@ -19,6 +19,15 @@
   </head>
 
   <body>
+    <div id="menu" class="menu-wrapper" style="display: none">
+      <div class="menu-content">
+        <span class="title-span">Escolha o status</span>
+        <span class="span-status">Pendente</span>
+        <span class="span-status">Em andamento</span>
+        <span class="span-status">Concluida</span>
+      </div>
+    </div>
+
     <main class="container">
       <header>
         <div class="point">
@@ -28,6 +37,8 @@
         </div>
         <h1>To-Do List</h1>
       </header>
+
+      <span class="material-symbols-outlined" id="arrow"> arrow_back_ios </span>
 
       <form class="create-task-form">
         <input id="task-input" type="text" placeholder="Add a new task..." />
@@ -50,8 +61,7 @@
     </div> -->
 
     <div id="modal" class="modal" style="display: none">
-      <div id="modal-content" class="modal-content">
-      </div>
+      <div id="modal-content" class="modal-content"></div>
     </div>
 
     <script src="script.js"></script>

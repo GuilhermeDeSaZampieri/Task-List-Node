@@ -120,20 +120,23 @@ const createRow = (task) => {
   div.appendChild(tdTitle);
   div.appendChild(divActions);
 
-  console.log(id);
   return div;
 };
+
+let modalStatus = "";
 
 const loadTasks = async () => {
   try {
     const tasks = await fetchTasks();
-    console.log("Dados recebidos:", tasks);
 
     tbody.innerHTML = "";
 
     tasks.forEach((task) => {
-      const tr = createRow(task);
-      tbody.appendChild(tr);
+      const { status } = task;
+      if (modalStatus === "" || status === modalStatus) {
+        const tr = createRow(task);
+        tbody.appendChild(tr);
+      }
     });
   } catch (error) {
     console.error("Erro ao carregar tasks:", error);
@@ -146,6 +149,44 @@ loadTasks();
 function handleDelete(id) {
   deleteTask(id);
   closeModal();
+}
+
+const arrowButton = document.getElementById("arrow");
+const menu = document.getElementById("menu");
+const menuItems = document.querySelectorAll(".span-status");
+let menuOpen = false;
+
+menuItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    const isAlreadyActive = item.classList.contains("active");
+    menuItems.forEach((i) => i.classList.remove("active"));
+
+    if (!isAlreadyActive) {
+      item.classList.add("active");
+      console.log("Item ativado:", item.textContent);
+      modalStatus = item.textContent.toLocaleLowerCase();
+    } else {
+      console.log("Item desativado:", item.textContent);
+      modalStatus = "";
+    }
+
+    loadTasks();
+  });
+});
+
+arrowButton.addEventListener("click", () => {
+  toggleMenu();
+});
+
+function toggleMenu() {
+  if (menuOpen) {
+    menu.style.display = "none";
+    arrowButton.innerHTML = `<span class="material-symbols-outlined" id="arrow">arrow_back_ios</span>`;
+  } else {
+    menu.style.display = "flex";
+    arrowButton.innerHTML = `<span class="material-symbols-outlined" id="arrow"> arrow_forward_ios </span>`;
+  }
+  menuOpen = !menuOpen;
 }
 
 function openModal(tipo, task) {
@@ -195,7 +236,6 @@ function openModal(tipo, task) {
         updateTask({ id: task.id, title, status });
         closeModal();
       });
-
   } else if (tipo == 2) {
     modalContent.innerHTML = `
       <h2 class="style-title">Deletar tarefa</h2>      
@@ -224,4 +264,6 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") closeModal();
 });
 
-document.querySelector("close").addEventListener("click", closeModal);
+document.querySelector("close").addEventListener("click", () => {
+  closeModal();
+});

@@ -21,6 +21,11 @@ const addtask = async (event) => {
   });
 
   loadTasks();
+    Toastify({
+      text: "Tarefa criada com sucesso!",
+      duration: 3000, 
+    
+  }).showToast();
   inputTask.value = "";
 };
 
@@ -30,6 +35,11 @@ const deleteTask = async (id) => {
   });
 
   loadTasks();
+      Toastify({
+      text: "Tarefa deletada com sucesso!",
+      duration: 3000, 
+    
+  }).showToast();
 };
 
 const updateTask = async ({ id, title, status }) => {
@@ -40,6 +50,11 @@ const updateTask = async ({ id, title, status }) => {
   });
 
   loadTasks();
+      Toastify({
+      text: "Tarefa atualizada com sucesso!",
+      duration: 3000, 
+    
+  }).showToast();
 };
 
 const formatDate = (dateUTC) => {

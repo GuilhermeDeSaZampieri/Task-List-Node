@@ -219,12 +219,12 @@ h1 {
 .actions {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .action-btn {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -524,4 +524,22 @@ input[type="text"]:focus {
     height: 7px;
     width: 7px;
   }
+}
+
+
+
+.toast-error{
+  background: #1E1E1E;
+  color: var(--font);
+  border-bottom: 2px solid #DA190B;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+}
+.toast-sucess{
+  background: #1E1E1E;
+  color: var(--font);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+  border-bottom: 2px solid #22C841;
+
 }

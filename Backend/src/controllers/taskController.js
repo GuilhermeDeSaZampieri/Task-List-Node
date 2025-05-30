@@ -11,19 +11,6 @@ const getAll = async (req, resp) => {
   }
 };
 
-
-const getById = async (req, resp) => {
-  const {id} = req.params;
-
-  try {
-    const tasks = await tasksModel.getById(id);
-
-    return resp.status(200).json({tasks});
-  } catch (error) {
-    return resp.status(500).send({ error: "Erro ao Econtrar tarefa" });
-  }
-};
-
 const CreateTask = async (req, resp) => {
   try {
     const createdTask = await tasksModel.CreateTask(req.body);
@@ -64,6 +51,5 @@ module.exports = {
     CreateTask,
     deleteTask,
     updateTask,
-    getById
 
 };

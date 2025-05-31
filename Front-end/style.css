@@ -7,15 +7,30 @@
 }
 
 :root {
+  --font: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, arial;
+
   --bg: rgb(34, 34, 33);
+  --white: #fff;
   --primarytext: #f2e8cf;
+  --arrowColor:rgb(231, 200, 120) ;
   --bodyBg: rgba(39, 39, 34, 0.86);
   --redPoint: #fc5f56;
   --yePoint: #fbbc2d;
   --grePoint: #22c841;
   --tasks: rgba(61, 61, 53, 0.66);
-  --font: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, arial;
+
+
+  --colorMenuWord: rgb(253, 255, 221);
+  --colorMenuHover:  #2a2a2a; 
+  --colorMenuStatusActive: rgba(251, 189, 45, 0.82); 
+
+  --BackEditBtn: #4caf50;
+  --BackDeletBtn: #f44336;
+  --BackDeletBtnHover: rgb(255, 17, 0);
+  --BackInfoBtn:  rgb(214, 160, 34);
+ 
+  --editBorderColorSelect: #888;
 }
 
 body {
@@ -35,6 +50,7 @@ body {
   flex-direction: column;
   padding-bottom: 40px;
   position: relative;
+  margin-bottom: 40px;
 }
 header {
   margin-top: 20px;
@@ -45,11 +61,6 @@ header {
   color: var(--primarytext);
   padding: 0 10px;
   box-sizing: border-box;
-}
-
-#arrow {
-  position: absolute;
-  left: 0;
 }
 
 .point {
@@ -95,22 +106,27 @@ h1 {
   align-items: center;
 }
 
+
 #arrow {
   position: absolute;
-  font-size: 24px;
-  color: #fff;
+  font-size: 2rem;
+  color: var(--font);
   top: 50%;
-  left: 10px;
+  left: 0;
+  margin-left: 3%;
   cursor: pointer;
 }
 
 #arrow:hover {
-  transform: scale(1.1);
+  color: var(--arrowColor);
+  transform: scale(1.2);
 }
+
 .menu-wrapper {
   width: 16rem;
   padding: 2rem 0; 
   margin-right: -1.5rem;
+  margin-bottom: 40px;
   display: flex;
   background-color: #1e1e1e;
   font-family: var(--font);
@@ -152,17 +168,17 @@ h1 {
   cursor: pointer;
   position: relative;
   transition: background-color 0.3s, color 0.3s;
-  color:rgb(253, 255, 221);
+  color:var(--colorMenuWord);
 }
 
 .span-status:hover {
-  background-color: #2a2a2a;
-  color: #fff;
+  background-color: var(--colorMenuHover);
+  color: var(--white);
   transform: scale(1.1);
 }
 .span-status.active {
-  background-color:rgba(251, 189, 45, 0.82);
-  color: white;
+  background-color:var(--colorMenuStatusActive);
+  color: var(--white);
   font-weight: bold;
 }
 
@@ -213,9 +229,17 @@ h1 {
   align-items: center;
   background: var(--tasks);
   border-radius: 10px;
-  padding: 0.5rem;
+  padding: 0.4rem;
+  padding-left: 1rem;
+  height: 3.2rem;
   box-sizing: border-box;
+  cursor: pointer;
 }
+
+.task:hover {
+    transform: scale(1.05) translateY(-2px);
+}
+
 .actions {
   display: flex;
   flex-direction: row;
@@ -235,17 +259,17 @@ h1 {
   color: var(--primarytext);
 }
 .edit-btn {
-  background-color: #4caf50;
+  background-color: var(--BackEditBtn);
 }
 .delete-btn {
-  background-color: #f44336;
+  background-color: var(--BackDeletBtn);
 }
 .info-btn {
-  background-color: rgb(214, 160, 34);
+  background-color: var(--BackInfoBtn);
 }
 
 .delete-btn:hover {
-  background-color: #da190b;
+  background-color: var(--BackDeletBtnHover);
   transform: scale(1.1);
 }
 .info-btn:hover {
@@ -283,23 +307,15 @@ h1 {
   }
 }
 
-.modal {
-  position: fixed;
-  z-index: 9999;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.6);
-}
 
 .modal-content {
   position: relative;
-  background-color: rgb(37, 36, 36);
+  background-color: var(--bodyBg);
   padding: 30px;
   border-radius: 12px;
   width: 90%;
   max-width: 500px;
-  margin: 20px;
+  margin: 2rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -340,8 +356,9 @@ h1 {
 #selectContainer {
   width: 70%;
 }
+
 select {
-  background-color: rgb(37, 36, 36);
+  background-color: var(--bodyBg);
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   color: var(--primarytext);
@@ -353,11 +370,15 @@ select {
 
 select:focus,
 input[type="text"]:focus {
-  border-color: #888;
+  border-color: (--bodyBg);
 }
 
 .form-actions {
-  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 85%;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
   margin-left: 0.3rem;
 }
 
@@ -369,7 +390,6 @@ input[type="text"]:focus {
   background-color: var(--yePoint);
   font-weight: 700;
   cursor: pointer;
-  margin-right: 0.5rem;
   transition: all 0.2s ease-in-out;
 }
 .updateModelButton:hover {
@@ -382,16 +402,15 @@ input[type="text"]:focus {
   height: 2rem;
   border-radius: 0.5rem;
   border: none;
-  background-color: #d62828;
-  color: #fff;
+  background-color: var(--BackDeletBtn);
+  color: var(--white);
   font-weight: 700;
   cursor: pointer;
-  margin-right: 0.5rem;
   transition: all 0.2s ease-in-out;
 }
 
 .deleteModelButton:hover {
-  background-color: rgb(255, 17, 0);
+  background-color: var(--BackDeletBtnHover);
   transform: scale(1.05);
 }
 
@@ -401,7 +420,7 @@ input[type="text"]:focus {
   border-radius: 0.5rem;
   border: none;
   background-color: #5a5a5a;
-  color: #fff;
+  color: var(--white);
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -409,7 +428,6 @@ input[type="text"]:focus {
 
 .cancelModelButton:hover {
   background-color: #444;
-  color: #fff;
   transform: scale(1.05);
 }
 
@@ -423,7 +441,7 @@ input[type="text"]:focus {
 }
 .close:hover {
   transform: scale(1.2);
-  color: rgb(233, 147, 112);
+  color: var(--colorMenuStatusActive);
 }
 
 @media (max-width: 600px) {
@@ -529,17 +547,17 @@ input[type="text"]:focus {
 
 
 .toast-error{
-  background: #1E1E1E;
+  background: var(--bg);
   color: var(--font);
-  border-bottom: 2px solid #DA190B;
+  border-bottom: 2px solid var(--BackDeletBtnHover);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   font-weight: 500;
 }
 .toast-sucess{
-  background: #1E1E1E;
+  background: var(--bg);
   color: var(--font);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   font-weight: 500;
-  border-bottom: 2px solid #22C841;
+  border-bottom: 2px solid var(--greenPoint);
 
 }

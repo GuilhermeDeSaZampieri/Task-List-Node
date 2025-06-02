@@ -10,19 +10,19 @@ export const createRow = (task) => {
   const editButton = createElement(
     "button",
     "",
-    '<span class="material-symbols-outlined"> edit </span>'
+    '<span class="material-symbols-outlined" id="icon"> edit </span>'
   );
 
   const infoButton = createElement(
     "button",
     "",
-    '<span class="material-symbols-outlined"> priority_high </span>'
+    '<span class="material-symbols-outlined" id="icon"> priority_high </span>'
   );
 
   const deletebutton = createElement(
     "button",
     "",
-    '<span class="material-symbols-outlined"> delete </span>'
+    '<span class="material-symbols-outlined" id="icon"> delete </span>'
   );
 
   div.classList.add("task");

@@ -2,8 +2,11 @@
 
 Este projeto é a minha primeira API criada em Node.js. 
 
-É um sistema que Lista, cria, atualiza, e deleta tarefas. 
-É um crud que ultiliza  métodos de requisições HTTP.   
+É um sistema que Lista, cria, atualiza, deleta tarefas e as organiza por status que a tarefa se encontra. 
+
+É um crud que ultiliza  métodos de requisições HTTP, com validações de Testes Unitarios via Jest no Back-End.   
+
+O Desing busca ser simples mas ao mesmo tempo bonito e muito funcional, contendo validações de entrada, facilidade de uso e responsividade em larguras de até 320px. 
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -15,8 +18,8 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
   <img align="center" alt="Express" src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" />
   <img align="center" alt="mySql" src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" />
   <img align="center" alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img align="center" alt="jest" src="https://img.shields.io/badge/Jest-FFF?style=for-the-badge&logo=jest&logoColor=orange" />
  
-
 </div><br/>
 
 
@@ -28,7 +31,24 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 - **Atualizar Tarefa** (Método `PUT`)
 - **Excluir Tarefa** (Método `DELETE`)
 
-## 📌 Como Funciona
+## 🔨 Dependências Principais:
+- **npm init -y**  Inicializa o projeto e cria o package.json
+- **npm i express** Framework para construir a API
+- **npm i mysql2** Driver para conexão com MySQL
+- **npm i dotenv** Carregar variáveis de ambiente do arquivo .env
+
+## 🔨 Dependências de Desenvolvimento:
+- **npm i nodemon -D** = Reinicia o servidor automaticamente ao salvar os arquivos
+- **npx eslint --init** = Inicializa e configura o ESLint para padronização de código
+- **docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql** = Conteiner MySql Docker
+
+## 📚 Biblioteca:
+- **Toastify.js:** https://apvarun.github.io/toastify-js/
+- **Jest.js:** https://jestjs.io/pt-BR/docs/getting-started
+
+<br>
+
+## 📌 Como Funciona:
 
 1. Clone o repositório:
    ```sh
@@ -42,14 +62,33 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
    ```sh
    npm install
    ```
-4. Configure o banco de dados MySQL e edite as credenciais no arquivo de configuração.
-5. Inicie o servidor:
+4. Edite as variaveis de ambiente no .env:
    ```sh
-   npm start
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=root
+   DB_DATABASE=tasklist
+   PORT=3000
    ```
-6. A API estará disponível em `http://localhost:3000`
+5. Inicie o container MySQL (caso use Docker):
+   ```sh
+   docker run --name mysql \
+   -e MYSQL_ROOT_PASSWORD=root \
+   -p 3306:3306 \
+   -d mysql
+   ```
+6. Inicie o servidor com nodemon:
+   ```sh 
+   npm run dev
+   ```
+   
+<br>
+
+## 🖥 Video do Projeto:
+
+
+https://github.com/user-attachments/assets/dba308a8-5a8f-4edb-a137-09981bb65217
+
 
 ---
-
-Desenvolvido com ❤️ por Gui
 
